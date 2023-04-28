@@ -3,16 +3,11 @@
 
 1. Create Api with Any point Studio
 
-      Structure
-![Structure](https://user-images.githubusercontent.com/82278181/235137960-1ad1b14b-4e9b-4def-afbd-b728f39fdd28.png)
-
-
-
-
-Canva Design
-
-
-
+      1.1 Structure
+      ![Structure](https://user-images.githubusercontent.com/82278181/235137960-1ad1b14b-4e9b-4def-afbd-b728f39fdd28.png)
+      
+      1.2 Canva Design
+ ![Hole_Str](https://user-images.githubusercontent.com/82278181/235138203-731608d4-4d16-4ff5-a8a4-f452d74f7e4d.png)
 
 Used to add some Tasks and to perform Select data from the Db
 With QueryParam
