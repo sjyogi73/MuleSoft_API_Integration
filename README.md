@@ -3,7 +3,8 @@
 
 1. Create Api with Any point Studio
 
-Structure
+      Structure
+![Structure](https://user-images.githubusercontent.com/82278181/235137960-1ad1b14b-4e9b-4def-afbd-b728f39fdd28.png)
 
 
 
