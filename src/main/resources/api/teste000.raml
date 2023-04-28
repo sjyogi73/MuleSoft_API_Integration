@@ -1,0 +1,101 @@
+#%RAML 1.0
+title: New API
+types:
+  user_info:
+    properties:
+      user_id:
+        example: 1
+        type: number
+        format: int
+      username?:
+        example: Example
+        type: string
+      first_name?:
+        example: Example
+        type: string
+      last_name?:
+        example: Example
+        type: string
+      gender?:
+        example: Example
+        type: string
+      password?:
+        example: Example
+        type: string
+  status:
+    properties:
+      user_id:
+        example: 1
+        type: number
+        format: int
+      username?:
+        example: Example
+        type: string
+      status?:
+        example: Example
+        type: string
+baseUri: api.teste00.com
+mediaType:
+  - application/json
+version: 1.0.0
+protocols:
+  - HTTP
+  - HTTPS
+/userdetails:
+  get:
+    displayName: Get list of users
+    responses:
+      "200":
+        body:
+          items:
+            type: user_info
+            example:
+              strict: true
+              value:
+                user_id: 1
+                username: Example
+                first_name: Example
+                last_name: Example
+                gender: Example
+                password: Example
+/status/{user_id}:
+  get:
+    body: {}
+    responses:
+      "200":
+        body:
+          type: status
+          example:
+            strict: true
+            value:
+              user_id: 1
+              username: Anudsa
+              status: ACTIVE
+    securedBy: []
+  uriParameters:
+    user_id:
+      type: string
+/user/{user_id}:
+  get:
+    displayName: Get Details form the User_Info
+    body: {}
+    responses:
+      "200":
+        body:
+          application/json:
+            type: user_info
+            example:
+              strict: true
+              value:
+                first_name: rogers
+                username: rogers63
+                user_id: 1
+                last_name: FDC
+                gender: Male
+                password: "1234"
+    securedBy: []
+  uriParameters:
+    user_id:
+      example: 1
+      type: number
+      format: int

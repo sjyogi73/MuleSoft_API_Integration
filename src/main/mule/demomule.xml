@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e85b8106-cbd3-45c6-b43d-feb3eda7bce3" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="45ebc933-c9a7-4da5-a805-8901e8a9c6bd" >
+		<db:my-sql-connection host="localhost" user="root" database="test" port="3306"/>
+	</db:config>
+	<db:config name="Database_Config1" doc:name="Database Config" doc:id="3da27e47-b757-4775-a395-26c9039e8b5a" >
+		<db:my-sql-connection host="localhost" port="3306" user="root" database="test" />
+	</db:config>
+	<db:config name="Database_Config2" doc:name="Database Config" doc:id="859ff766-61be-4200-a38a-d436b4e73578" >
+		<db:my-sql-connection host="bgdmg7mcv6idyhzwxuno-mysql.services.clever-cloud.com" port="3306" user="uatnjku93r27whov" password="R0a6pbvYaV12vPJCz4Mh" database="bgdmg7mcv6idyhzwxuno" />
+	</db:config>
+	<flow name="demomuleFlow" doc:id="4e0bd9a6-1d03-49fc-8983-50c7f10b6fa7" >
+		<http:listener doc:name="Listener" doc:id="c726b11d-d6b8-4374-88ee-617e0115a620" path="/dbconfig" config-ref="HTTP_Listener_config"/>
+		<set-variable value="#[attributes.queryParams.userId]" doc:name="Set Variable" doc:id="bb0da85e-6fe4-4509-80e0-7bea33d1cd2d" variableName="param"/>
+		<logger level="INFO" doc:name="Logger" doc:id="6777cfec-2bd4-4601-b913-983e3fd3cb59" message="Query Param Value is : #[vars.param]" />
+		<db:select doc:name="Select" doc:id="77fff14e-2c99-4d73-9f64-ca846b2357d3" config-ref="Database_Config2">
+			<db:sql><![CDATA[select *from user_details where gender = :ID_E ]]></db:sql>
+ <db:input-parameters><![CDATA[#[{
+	ID_E :	vars.param
+ }]]]></db:input-parameters>		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="94d12078-750d-449b-a12d-ef5f5360b070" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
